@@ -1,6 +1,6 @@
 <div class="container">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" [routerLink]="['/inicio']">
       <img
         src="../assets/img/logo-lve.png"
         width="auto"
@@ -24,18 +24,31 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/inicio']">Inicio</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/inicio']"
+            *ngIf="identity && identity.firstname"
+            >Inicio</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" >Categorias</a>
+          <a
+            class="nav-link"
+            [routerLink]="['/courses']"
+            *ngIf="identity && identity.firstname"
+            >Cursos</a
+          >
         </li>
       </ul>
-      <ul class="navbar-nav navbar-right">
+      <ul class="navbar-nav navbar-right" *ngIf="!identity">
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
+          <a class="nav-link" [routerLink]="['/login']">Identificate</a>
         </li>
       </ul>
-      <ul class="navbar-nav navbar-right">
+      <ul
+        class="navbar-nav navbar-right"
+        *ngIf="identity && identity.firstname"
+      >
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -46,19 +59,69 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            Nombre de usuario
+            <img
+              src="{{ identity.userpictureurl }}"
+              class="rounded-circle z-depth-0 md-avatar"
+            />
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Crear Entrada</a>
-            <a class="dropdown-item" href="#">Crear Categoria</a>
+            <a class="dropdown-item" href="#">{{
+              identity.firstname + " " + identity.lastname
+            }}</a>
+            <a class="dropdown-item" href="#">Calificaciones</a>
+            <a class="dropdown-item" href="#">Mensajes</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Mi perfil</a>
-            <a class="dropdown-item" href="#">Ajustes</a>
-            <a class="dropdown-item" href="#">Salir</a>
+            <a class="dropdown-item" href="#">Preferencias</a>
+            <a class="dropdown-item" [routerLink]="['/logout/1']">Salir</a>
           </div>
         </li>
       </ul>
     </div>
   </nav>
   <router-outlet></router-outlet>
+  <hr />
+  <!-- Footer -->
+  <footer class="page-footer font-small indigo">
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-6 mt-md-0 mt-3">
+          <ul class="list-unstyled">
+            <li class="text-muted">
+              <h4>Mantente en contacto</h4>
+            </li>
+            <li class="text-muted">
+              Telefono : telefono
+            </li>
+            <li class="text-muted">
+              Correo : correo@nn.nn
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6 mt-md-0 mt-3 ">
+          <ul class="list-unstyled float-md-right">
+            <li class="mb-3">
+              <a href="#" class="btn btn-secondary btn-sm active mr-3"
+                ><i class="fa fa-facebook-square" style="font-size:36px;"></i
+              ></a>
+              <a href="#" class="btn btn-secondary btn-sm active mr-3"
+                ><i class="fa fa-instagram" style="font-size:36px;"></i
+              ></a>
+              <a
+                href="https://download.moodle.org/mobile?version=2019111801.01&amp;lang=es&amp;iosappid=633359593&amp;androidappid=com.moodle.moodlemobile"
+                class="btn btn-secondary btn-sm active"
+                ><i class="fa fa-mobile" style="font-size:36px;"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright text-center py-3">
+      © 2020 Copyright:
+      <a href="#"> Fharavena</a>
+    </div>
+  </footer>
 </div>

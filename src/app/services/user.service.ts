@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { User } from "../models/user";
 import { global } from "./globals";
 
 @Injectable()
@@ -14,7 +13,6 @@ export class UserService {
   }
 
   signup(user): Observable<any> {
-
     // Setup query parameter
     let params = new HttpParams();
     params = params.append("username", user.username);
@@ -29,8 +27,7 @@ export class UserService {
     return this._http.get(this.url + "login/token.php", { params: params });
   }
 
-  UserProfile(token): Observable<any> {
-
+  userprofile(token): Observable<any> {
     // Setup log namespace query parameter
     let params = new HttpParams();
     params = params.append("wstoken", token);
@@ -42,6 +39,30 @@ export class UserService {
       "application/x-www-form-urlencoded"
     );
 
-    return this._http.get(this.url + "/webservice/rest/server.php", { params: params });
+    return this._http.get(this.url + "/webservice/rest/server.php", {
+      params: params
+    });
+  }
+
+  getIdentity() {
+    let identity = JSON.parse(localStorage.getItem("identity"));
+
+    if (identity && identity != "undefined") {
+      this.identity = identity;
+    } else {
+      this.identity = null;
+    }
+    return this.identity;
+  }
+
+  getToken() {
+    let token = JSON.parse(localStorage.getItem("token"));
+
+    if (token && token != "undefined") {
+      this.token = token;
+    } else {
+      this.token = null;
+    }
+    return this.token;
   }
 }
