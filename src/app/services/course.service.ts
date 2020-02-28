@@ -27,4 +27,22 @@ export class CourseService {
       params: params
     });
   }
+
+  getcourse(token, id): Observable<any> {
+    // Setup log namespace query parameter
+    let params = new HttpParams();
+    params = params.append("wstoken", token);
+    params = params.append("moodlewsrestformat", "json");
+    params = params.append("wsfunction", "core_course_get_contents");
+    params = params.append("courseid", id);
+
+    let headers = new HttpHeaders().set(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+
+    return this._http.get(this.url + "/webservice/rest/server.php", {
+      params: params
+    });
+  }
 }

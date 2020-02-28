@@ -9,7 +9,7 @@
       display:inline-block;"
     >
       <h4>
-        <a href="#">{{ course.fullname }}</a>
+        <a [routerLink]="['/course', course.id]">{{ course.fullname }}</a>
       </h4>
     </div>
   </div>

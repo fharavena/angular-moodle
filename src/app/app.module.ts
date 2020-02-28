@@ -10,6 +10,9 @@ import { RegisterComponent } from "./components/register/register.component";
 import { HomeComponent } from "./components/home/home.component";
 import { ErrorComponent } from "./components/error/error.component";
 import { CourseComponent } from './components/course/course.component';
+import { AsignaturaComponent } from './components/asignatura/asignatura.component';
+import { LeccionesComponent } from './components/lecciones/lecciones.component';
+import { ModulosComponent } from './components/modulos/modulos.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { CourseComponent } from './components/course/course.component';
     RegisterComponent,
     HomeComponent,
     ErrorComponent,
-    CourseComponent
+    CourseComponent,
+    AsignaturaComponent,
+    LeccionesComponent,
+    ModulosComponent
   ],
   imports: [BrowserModule, routing, FormsModule, HttpClientModule],
   providers: [appRoutingProviders],

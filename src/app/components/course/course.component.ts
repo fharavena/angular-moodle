@@ -12,6 +12,7 @@ import { Course } from "src/app/models/course";
 export class CourseComponent implements OnInit {
   public token;
   public courses;
+  public course;
   public status;
   public loading = true;
 
@@ -58,4 +59,6 @@ export class CourseComponent implements OnInit {
       }
     );
   }
+
+
 }

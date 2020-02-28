@@ -1,0 +1,75 @@
+<div class="wrapper center-block">
+  <div
+    class="panel-group"
+    id="accordion"
+    role="tablist"
+    aria-multiselectable="true"
+  >
+    <div class="panel panel-default">
+      <div class="panel-heading active" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a
+            role="button"
+            data-toggle="collapse"
+            data-parent="#accordion"
+            href="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Collapsible Group Item #1
+            <i class="fa fa-angle-down"></i>
+          </a>
+        </h4>
+      </div>
+      <div
+        id="collapseOne"
+        class="panel-collapse collapse in"
+        role="tabpanel"
+        aria-labelledby="headingOne"
+      >
+        <div class="panel-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+          terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+          skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+          Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+          single-origin coffee nulla assumenda shoreditch et. Nihil anim
+          keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+          sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+          occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt
+          you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5">
+  <div class="row" *ngIf="!loading">
+    <div class="col-12 " *ngFor="let theme of themes">
+      <h4>
+        <a href="#">{{ theme.name }}</a>
+        <div [innerHTML]="theme.summary"></div>
+        <div *ngFor="let module of theme.modules">
+          <div
+            *ngIf="module.description"
+            [innerHTML]="module.description"
+          ></div>
+          <div *ngIf="!module.description">
+            <a href="{{ module.url }}">{{ module.name }}</a>
+          </div>
+        </div>
+      </h4>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 mt-3" *ngIf="loading">
+    <img
+      src="/assets/img/loading.gif"
+      style="display: block;
+    margin-left: auto;
+    margin-right: auto;"
+    />
+  </div>
+</div>
