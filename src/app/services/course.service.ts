@@ -28,6 +28,24 @@ export class CourseService {
     });
   }
 
+  getcourses_enrolled(token, userid): Observable<any> {
+    // Setup log namespace query parameter
+    let params = new HttpParams();
+    params = params.append("wstoken", token);
+    params = params.append("moodlewsrestformat", "json");
+    params = params.append("wsfunction", "core_enrol_get_users_courses");
+    params = params.append("userid", userid);
+
+    let headers = new HttpHeaders().set(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+
+    return this._http.get(this.url + "/webservice/rest/server.php", {
+      params: params
+    });
+  }
+
   getcourse(token, id): Observable<any> {
     // Setup log namespace query parameter
     let params = new HttpParams();

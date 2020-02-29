@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { CourseService } from "src/app/services/course.service";
-import { Course } from "src/app/models/course";
-
 
 @Component({
   selector: "app-course",
@@ -11,8 +9,8 @@ import { Course } from "src/app/models/course";
 })
 export class CourseComponent implements OnInit {
   public token;
-  public courses;
-  public course;
+  public identity;
+  public courses_enrolled;
   public status;
   public loading = true;
 
@@ -20,45 +18,23 @@ export class CourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem("token");
-    this.getcourses();
+    this.identity = JSON.parse(localStorage.getItem("identity"));
+    this.getcourses_where_enrolled();
   }
 
-  getcourses() {
-    this.courses = this._courseService.getcourses(this.token).subscribe(
-      response => {
-        //this.courses = slice(response,['id','fullname']);
-        this.status = "success";
-        this.courses = response.courses
-          .filter(obj => {
-            return obj.fullname !== "Liceo Virtual";
-          })
-          .map(obj => ({
-            id: obj.id,
-            fullname: obj.fullname,
-            categoryid: obj.categoryid,
-            sortorder: obj.sortorder
-          }))
-          .sort((a, b) => {
-            // Use toUpperCase() to ignore character casing
-            const bandA = a.sortorder;
-            const bandB = b.sortorder;
-
-            let comparison = 0;
-            if (bandA > bandB) {
-              comparison = 1;
-            } else if (bandA < bandB) {
-              comparison = -1;
-            }
-            return comparison;
-          });
+  getcourses_where_enrolled() {
+    this._courseService
+      .getcourses_enrolled(this.token, this.identity.userid)
+      .subscribe(
+        response => {
+          this.status = "success";
+          this.courses_enrolled = response;
           this.loading = false;
-      },
-      error => {
-        this.status = "error";
-        console.log(<any>error);
-      }
-    );
+        },
+        error => {
+          this.status = "error";
+          console.log(<any>error);
+        }
+      );
   }
-
-
 }
