@@ -13,6 +13,7 @@ import { CourseComponent } from './components/course/course.component';
 import { AsignaturaComponent } from './components/asignatura/asignatura.component';
 import { LeccionesComponent } from './components/lecciones/lecciones.component';
 import { ModulosComponent } from './components/modulos/modulos.component';
+import { QuizComponent } from './components/quiz/quiz.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ModulosComponent } from './components/modulos/modulos.component';
     CourseComponent,
     AsignaturaComponent,
     LeccionesComponent,
-    ModulosComponent
+    ModulosComponent,
+    QuizComponent
   ],
   imports: [BrowserModule, routing, FormsModule, HttpClientModule],
   providers: [appRoutingProviders],
