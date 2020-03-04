@@ -12,5 +12,4 @@ export class QuizService {
     this.url = global.url;
   }
 
-
 }
